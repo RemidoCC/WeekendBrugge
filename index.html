@@ -358,15 +358,15 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       ["vr-avond", "Avond", "Diner in het huisje"],
       ["vr-laat", "Late avond", "Na het diner"] ] },
     { id: "zaterdag", naam: "Zaterdag", datum: "14 november", delen: [
-      ["za-ochtend", "Ochtend", "Rustig opstarten"],
-      ["za-lunch", "Lunch", "In Brugge"],
-      ["za-middag", "Middag", "Activiteit"],
+      ["za-ochtend", "Ochtend", "Wandelen"],
+      ["za-lunch", "Lunch", "Thuis of in Brugge"],
+      ["za-middag", "Middag", "Met het OV naar Brugge"],
       ["za-avond", "Avond", "Diner"],
-      ["za-nacht", "Nacht", "Stappen"] ] },
+      ["za-nacht", "Late avond", "Spelletjes in het huisje"] ] },
     { id: "zondag", naam: "Zondag", datum: "15 november", delen: [
-      ["zo-ochtend", "Ochtend", "Ontbijt & uitchecken"],
-      ["zo-wandeling", "Middag", "Wandeling"],
-      ["zo-lunch", "Lunch", "Na de wandeling, daarna naar huis"] ] }
+      ["zo-ochtend", "Ochtend", "Rustig aan & uitchecken"],
+      ["zo-wandeling", "Middag", "Afsluiter onderweg"],
+      ["zo-lunch", "Lunch", "Daarna naar huis"] ] }
   ];
   const CATEGORIEEN = [["ontbijt","Ontbijt"],["lunch","Lunch"],["diner","Diner"],["drank","Drank"],["snacks","Snacks"],["overig","Overig"]];
   const DEELNAAM = {}; DAGEN.forEach(d => d.delen.forEach(([id, n, s]) => DEELNAAM[id] = `${d.naam} · ${n.toLowerCase()} — ${s}`));

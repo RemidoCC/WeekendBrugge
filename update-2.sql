@@ -114,5 +114,10 @@ comment on function public.weekend_boodschappen(text) is 'TIJDELIJK: Vriendenwee
 comment on function public.weekend_boodschap_opslaan(text, jsonb, text) is 'TIJDELIJK: Vriendenweekend Brugge. Verwijderen met opruimen.sql.';
 comment on function public.weekend_boodschap_verwijder(text, uuid) is 'TIJDELIJK: Vriendenweekend Brugge. Verwijderen met opruimen.sql.';
 
+-- Reistijden van de OV-opties naar Brugge (zaterdag 14 november)
+update weekend.items set tijd_van = '13:11', tijd_tot = '19:41' where dagdeel = 'za-middag' and titel like '🚆 OV-optie A%' and tijd_van is null;
+update weekend.items set tijd_van = '13:11', tijd_tot = '20:41' where dagdeel = 'za-middag' and titel like '🚆 OV-optie B%' and tijd_van is null;
+update weekend.items set tijd_van = '12:45', tijd_tot = '20:00' where dagdeel = 'za-middag' and titel like '🚌 OV-optie C%' and tijd_van is null;
+
 -- PostgREST de nieuwe functies direct laten zien
 notify pgrst, 'reload schema';
