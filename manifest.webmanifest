@@ -1,0 +1,17 @@
+{
+  "name": "Vriendenweekend Brugge",
+  "short_name": "Brugge",
+  "description": "Planner voor het vriendenweekend in Beernem en Brugge, 13 tot 15 november.",
+  "lang": "nl",
+  "start_url": "./#draaiboek",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF6EE",
+  "theme_color": "#6E1423",
+  "icons": [
+    { "src": "icoon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icoon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icoon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icoon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
