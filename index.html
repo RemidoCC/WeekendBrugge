@@ -159,6 +159,7 @@ table.overzicht{width:100%;border-collapse:collapse;font-size:15px}
 .bs-kop .samen{color:var(--inkt-zacht);font-size:15px}
 .bs-kop .samen b{color:var(--inkt)}
 .bs-nieuw{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px auto;gap:8px;align-items:end;padding:14px 0}
+.bs-nieuw.zonder-prijs{grid-template-columns:2fr 1fr 1fr 1fr auto}
 .bs-nieuw .veld label{font-size:12px}
 .bs-groep{margin:22px 0 0}
 .bs-groep h3{font-size:24px;color:var(--bordeaux);display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
@@ -204,7 +205,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
 .laden{color:var(--inkt-zacht);padding:30px 0;text-align:center}
 
 @media (max-width:860px){
-  .bs-nieuw{grid-template-columns:1fr 1fr}
+  .bs-nieuw,.bs-nieuw.zonder-prijs{grid-template-columns:1fr 1fr}
   .bs-nieuw .veld-naam{grid-column:1/-1}
   .bs-nieuw .knop{grid-column:1/-1;justify-content:center;min-height:42px}
 }
@@ -258,7 +259,8 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
 <main class="wrap">
   <div class="tabs" role="tablist" aria-label="Onderdelen">
     <button class="tab" role="tab" id="tab-planning" aria-controls="paneel-planning" aria-selected="true">Planning</button>
-    <button class="tab" role="tab" id="tab-boodschappen" aria-controls="paneel-boodschappen" aria-selected="false">Boodschappen <span class="teller" id="bs-teller">0</span></button>
+    <button class="tab" role="tab" id="tab-boodschappen" aria-controls="paneel-boodschappen" aria-selected="false">Boodschappen <span class="teller" id="teller-boodschappen">0</span></button>
+    <button class="tab" role="tab" id="tab-meenemen" aria-controls="paneel-meenemen" aria-selected="false">Meenemen <span class="teller" id="teller-meenemen">0</span></button>
   </div>
   <div id="storing"></div>
 
@@ -269,20 +271,8 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     <div id="inhoud"><p class="laden">Planning laden…</p></div>
   </div>
 
-  <div role="tabpanel" id="paneel-boodschappen" aria-labelledby="tab-boodschappen" hidden>
-    <div class="bs-kop"><h2>Boodschappen</h2><span class="samen" id="bs-samen"></span></div>
-    <div class="blok">
-      <form class="bs-nieuw" id="form-bs-nieuw" autocomplete="off">
-        <div class="veld veld-naam"><label for="n-naam">Wat</label><input id="n-naam" maxlength="120" required placeholder="Bijv. croissants"></div>
-        <div class="veld"><label for="n-hv">Hoeveel</label><input id="n-hv" maxlength="60" placeholder="14 stuks"></div>
-        <div class="veld"><label for="n-cat">Soort</label><select id="n-cat"></select></div>
-        <div class="veld"><label for="n-wie">Wie neemt mee</label><input id="n-wie" maxlength="40" placeholder="Optioneel"></div>
-        <div class="veld"><label for="n-prijs">Prijs (€)</label><input id="n-prijs" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Optioneel"></div>
-        <button class="knop hoofd" type="submit" id="n-knop">+ Toevoegen</button>
-      </form>
-    </div>
-    <div id="bs-lijst"><p class="laden">Boodschappen laden…</p></div>
-  </div>
+  <div role="tabpanel" id="paneel-boodschappen" aria-labelledby="tab-boodschappen" hidden></div>
+  <div role="tabpanel" id="paneel-meenemen" aria-labelledby="tab-meenemen" hidden></div>
 </main>
 
 <footer>Prijzen met het label <b>geschat</b> zijn een inschatting; zet ze op <b>bevestigd</b> zodra je de echte prijs weet. Alles wordt direct opgeslagen.</footer>
@@ -336,8 +326,8 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       <div class="veld"><label for="b-cat">Soort</label><select id="b-cat"></select></div>
     </div>
     <div class="twee">
-      <div class="veld"><label for="b-wie">Wie neemt mee</label><input id="b-wie" maxlength="40"></div>
-      <div class="veld"><label for="b-prijs">Prijs (€)</label><input id="b-prijs" type="number" min="0" step="0.01" inputmode="decimal"></div>
+      <div class="veld"><label for="b-wie" id="b-wie-label">Wie haalt het</label><input id="b-wie" maxlength="40"></div>
+      <div class="veld" id="b-prijs-veld"><label for="b-prijs">Prijs (€)</label><input id="b-prijs" type="number" min="0" step="0.01" inputmode="decimal"></div>
     </div>
     <div class="fout" id="bs-fout"></div>
     <div class="dlg-acties"><button class="knop" type="button" id="bs-annuleer">Annuleren</button><button class="knop hoofd" type="submit" id="bs-opslaan">Opslaan</button></div>
@@ -368,12 +358,24 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       ["zo-wandeling", "Middag", "Afsluiter onderweg"],
       ["zo-lunch", "Lunch", "Daarna naar huis"] ] }
   ];
-  const CATEGORIEEN = [["ontbijt","Ontbijt"],["lunch","Lunch"],["diner","Diner"],["drank","Drank"],["snacks","Snacks"],["overig","Overig"]];
+  const LIJSTEN = {
+    boodschappen: {
+      titel: "Boodschappen", prijs: true, wie: "Wie haalt het", voorbeeld: "Bijv. croissants", hv: "14 stuks",
+      leeg: "Nog niets op de lijst. Zet hierboven het eerste ding erop.",
+      cats: [["drank","Drank"],["ontbijt","Ontbijt"],["lunch","Lunch"],["diner","Diner"],["snacks","Snacks"],["overig","Overig"]]
+    },
+    meenemen: {
+      titel: "Meenemen", prijs: false, wie: "Wie neemt mee", voorbeeld: "Bijv. speaker", hv: "1×",
+      leeg: "Nog niets op de lijst. Zet hierboven het eerste ding erop.",
+      cats: [["papieren","Papieren & geld"],["auto","Auto"],["spelletjes","Spelletjes & muziek"],["keuken","Keuken & huishouden"],["slapen","Slapen"],["persoonlijk","Persoonlijk"],["overig","Overig"]]
+    }
+  };
   const DEELNAAM = {}; DAGEN.forEach(d => d.delen.forEach(([id, n, s]) => DEELNAAM[id] = `${d.naam} · ${n.toLowerCase()} — ${s}`));
   DEELNAAM.vast = "Vaste post";
 
   let items = [], boodschappen = [];
   let bsBeschikbaar = true;     // false zolang update-2.sql nog niet gedraaid is
+  let meenBeschikbaar = true;   // false zolang update-3.sql nog niet gedraaid is
   let tijdBeschikbaar = false;  // true zodra de database tijd-kolommen teruggeeft
   let bezig = false;
   const $ = s => document.querySelector(s);
@@ -451,6 +453,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       tijdBeschikbaar = items.length ? ("tijd_van" in items[0]) : tijdBeschikbaar;
       bsBeschikbaar = bs !== null;
       boodschappen = bs || [];
+      meenBeschikbaar = bsBeschikbaar && (boodschappen.length ? ("lijst" in boodschappen[0]) : true);
       $("#storing").replaceChildren();
       teken();
     } catch (e) {
@@ -480,7 +483,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
   $("#dlg-code").addEventListener("cancel", e => { if (!code) e.preventDefault(); });
 
   /* ---------- Tabs ---------- */
-  const TABS = ["planning", "boodschappen"];
+  const TABS = ["planning", "boodschappen", "meenemen"];
   function kiesTab(naamTab, focus) {
     TABS.forEach(t => {
       const aan = t === naamTab;
@@ -633,48 +636,75 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     $("#balk").classList.toggle("over", rest < 0);
   }
 
-  /* ---------- Tekenen: boodschappen ---------- */
-  function tekenBoodschappen() {
-    const open = boodschappen.filter(b => !b.afgevinkt).length;
-    $("#bs-teller").textContent = open;
-    const lijst = $("#bs-lijst");
-    $("#form-bs-nieuw").querySelectorAll("input,select,button").forEach(x => x.disabled = !bsBeschikbaar);
-    if (!bsBeschikbaar) {
-      $("#bs-samen").textContent = "";
-      lijst.replaceChildren(el("div", { class: "storing", text: "De boodschappenlijst is nog niet ingericht in de database. Draai eerst update-2.sql in Supabase." }));
+  /* ---------- Tekenen: lijsten (boodschappen & meenemen) ---------- */
+  const vanLijst = l => boodschappen.filter(b => (b.lijst || "boodschappen") === l);
+  const lijstBeschikbaar = l => l === "meenemen" ? meenBeschikbaar : bsBeschikbaar;
+
+  function bouwPaneel(l) {
+    const cfg = LIJSTEN[l], pre = l.slice(0, 2) + "-";
+    const veld = (id, label, invoer, klasse) => el("div", { class: "veld" + (klasse ? " " + klasse : "") }, el("label", { for: pre + id, text: label }), invoer);
+    const catSelect = el("select", { id: pre + "cat" }, cfg.cats.map(([v, t]) => el("option", { value: v, text: t })));
+    const form = el("form", { class: "bs-nieuw" + (cfg.prijs ? "" : " zonder-prijs"), autocomplete: "off" },
+      veld("naam", "Wat", el("input", { id: pre + "naam", maxlength: "120", required: true, placeholder: cfg.voorbeeld }), "veld-naam"),
+      veld("hv", "Hoeveel", el("input", { id: pre + "hv", maxlength: "60", placeholder: cfg.hv })),
+      veld("cat", "Soort", catSelect),
+      veld("wie", cfg.wie, el("input", { id: pre + "wie", maxlength: "40", placeholder: "Optioneel" })),
+      cfg.prijs ? veld("prijs", "Prijs (€)", el("input", { id: pre + "prijs", type: "number", min: "0", step: "0.01", inputmode: "decimal", placeholder: "Optioneel" })) : null,
+      el("button", { class: "knop hoofd", type: "submit", text: "+ Toevoegen" }));
+    form.addEventListener("submit", e => voegToe(e, l, form));
+    cfg.dom = { pre, form, samen: el("span", { class: "samen" }), lijst: el("div", {}, el("p", { class: "laden", text: "Laden…" })) };
+    $("#paneel-" + l).replaceChildren(
+      el("div", { class: "bs-kop" }, el("h2", { text: cfg.titel }), cfg.dom.samen),
+      el("div", { class: "blok" }, form),
+      cfg.dom.lijst);
+  }
+  Object.keys(LIJSTEN).forEach(bouwPaneel);
+
+  function tekenBoodschappen() { Object.keys(LIJSTEN).forEach(tekenLijst); }
+
+  function tekenLijst(l) {
+    const cfg = LIJSTEN[l], d = cfg.dom;
+    const rijen = vanLijst(l);
+    const open = rijen.filter(b => !b.afgevinkt).length;
+    $("#teller-" + l).textContent = open;
+    const ok = lijstBeschikbaar(l);
+    d.form.querySelectorAll("input,select,button").forEach(x => x.disabled = !ok);
+    if (!ok) {
+      d.samen.textContent = "";
+      d.lijst.replaceChildren(el("div", { class: "storing", text: `Deze lijst is nog niet ingericht in de database. Draai eerst ${l === "meenemen" && bsBeschikbaar ? "update-3.sql" : "update-2.sql"} in Supabase.` }));
       return;
     }
-    const metPrijs = boodschappen.filter(b => b.prijs != null);
+    const metPrijs = cfg.prijs ? rijen.filter(b => b.prijs != null) : [];
     const som = metPrijs.reduce((s, b) => s + Number(b.prijs), 0);
-    $("#bs-samen").replaceChildren(
-      el("b", { text: `${boodschappen.length - open} van ${boodschappen.length}` }), " afgevinkt",
+    d.samen.replaceChildren(...[
+      el("b", { text: `${rijen.length - open} van ${rijen.length}` }), l === "meenemen" ? " ingepakt" : " afgevinkt",
       metPrijs.length ? " · geschat " : null, metPrijs.length ? el("b", { text: eurSlim(som) }) : null,
-      metPrijs.length ? ` (${eur(som / PERSONEN, true)} p.p.)` : null);
-    if (!boodschappen.length) {
-      lijst.replaceChildren(el("p", { class: "leeg-lijst", text: "Nog niets op de lijst. Zet hierboven het eerste ding erop." }));
-      return;
-    }
-    lijst.replaceChildren(...CATEGORIEEN.map(([cat, label]) => {
-      const rijen = boodschappen.filter(b => b.categorie === cat)
+      metPrijs.length ? ` (${eur(som / PERSONEN, true)} p.p.)` : null].filter(x => x != null));
+    if (!rijen.length) { d.lijst.replaceChildren(el("p", { class: "leeg-lijst", text: cfg.leeg })); return; }
+    const bekend = new Set(cfg.cats.map(c => c[0]));
+    d.lijst.replaceChildren(...cfg.cats.map(([cat, label]) => {
+      const groep = rijen.filter(b => bekend.has(b.categorie) ? b.categorie === cat : cat === "overig")
         .sort((a, b) => (a.afgevinkt - b.afgevinkt) || String(a.toegevoegd_op).localeCompare(String(b.toegevoegd_op)));
-      if (!rijen.length) return null;
-      const nogTeDoen = rijen.filter(r => !r.afgevinkt).length;
+      if (!groep.length) return null;
+      const nogTeDoen = groep.filter(r => !r.afgevinkt).length;
+      const groepSom = cfg.prijs ? groep.reduce((s, b) => s + (b.prijs != null ? Number(b.prijs) : 0), 0) : 0;
       return el("section", { class: "bs-groep" },
-        el("h3", {}, label, el("span", { text: nogTeDoen ? `nog ${nogTeDoen}` : "alles binnen" })),
-        el("div", { class: "blok" }, rijen.map(bsRij)));
+        el("h3", {}, label, el("span", { text: (nogTeDoen ? `nog ${nogTeDoen}` : "alles binnen") + (groepSom ? ` · ${eurSlim(groepSom)}` : "") })),
+        el("div", { class: "blok" }, groep.map(b => bsRij(b, l))));
     }).filter(Boolean));
   }
 
-  function bsRij(b) {
-    const sub = [b.wie ? `neemt ${b.wie} mee` : "", b.bijgewerkt_door ? `door ${b.bijgewerkt_door}` : ""].filter(Boolean).join(" · ");
+  function bsRij(b, l) {
+    const cfg = LIJSTEN[l];
+    const sub = [b.wie ? (l === "meenemen" ? `neemt ${b.wie} mee` : `haalt ${b.wie}`) : "", b.bijgewerkt_door ? `door ${b.bijgewerkt_door}` : ""].filter(Boolean).join(" · ");
     return el("div", { class: "bs-rij" + (b.afgevinkt ? " klaar" : "") },
       el("input", { type: "checkbox", class: "vink", checked: b.afgevinkt, "aria-label": (b.afgevinkt ? "Niet meer afgevinkt: " : "Afvinken: ") + b.naam, onchange: ev => vink(b, ev.currentTarget) }),
       el("div", { class: "naam" },
         el("b", { text: b.naam }), b.hoeveelheid ? el("span", { class: "hv", text: " · " + b.hoeveelheid }) : null,
         sub ? el("small", { text: sub }) : null),
-      el("span", { class: "bs-prijs", text: b.prijs != null ? eurSlim(b.prijs) : "" }),
+      el("span", { class: "bs-prijs", text: cfg.prijs && b.prijs != null ? eurSlim(b.prijs) : "" }),
       el("span", { class: "duw" },
-        el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken: " + b.naam, onclick: () => openBs(b) }, "✎"),
+        el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken: " + b.naam, onclick: () => openBs(b, l) }, "✎"),
         el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen: " + b.naam, onclick: () => verwijderBs(b) }, "🗑")));
   }
 
@@ -742,23 +772,22 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     finally { knop.disabled = false; }
   });
 
-  /* ---------- Acties: boodschappen ---------- */
-  ["#n-cat", "#b-cat"].forEach(s => $(s).replaceChildren(...CATEGORIEEN.map(([v, l]) => el("option", { value: v, text: l }))));
-
-  $("#form-bs-nieuw").addEventListener("submit", async e => {
+  /* ---------- Acties: lijsten ---------- */
+  async function voegToe(e, l, form) {
     e.preventDefault();
-    const n = $("#n-naam").value.trim(); if (!n) return;
-    const prijs = $("#n-prijs").value;
-    const item = { naam: n, hoeveelheid: $("#n-hv").value.trim(), categorie: $("#n-cat").value, wie: $("#n-wie").value.trim(), prijs: prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)) };
-    const knop = $("#n-knop"); knop.disabled = true;
+    const cfg = LIJSTEN[l], p = cfg.dom.pre, v = id => { const x = form.querySelector("#" + p + id); return x ? x.value.trim() : ""; };
+    const n = v("naam"); if (!n) return;
+    const prijs = v("prijs");
+    const item = { lijst: l, naam: n, hoeveelheid: v("hv"), categorie: v("cat"), wie: v("wie"), prijs: prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)) };
+    const knop = form.querySelector("button[type=submit]"); knop.disabled = true;
     try {
       const nieuw = await rpc("weekend_boodschap_opslaan", { p_code: code, p_item: item, p_door: naam });
       if (nieuw) boodschappen.push(nieuw);
-      ["#n-naam", "#n-hv", "#n-wie", "#n-prijs"].forEach(s => $(s).value = "");
-      tekenBoodschappen(); $("#n-naam").focus();
+      ["naam", "hv", "wie", "prijs"].forEach(id => { const x = form.querySelector("#" + p + id); if (x) x.value = ""; });
+      tekenBoodschappen(); form.querySelector("#" + p + "naam").focus();
     } catch (err) { melding(err.message, true); }
     finally { knop.disabled = false; }
-  });
+  }
 
   async function vink(b, box) {
     box.disabled = true;
@@ -775,17 +804,24 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
   }
 
   const dlgBs = $("#dlg-bs"), fBs = $("#form-bs");
-  function openBs(b) {
+  let bsLijst = "boodschappen";
+  function openBs(b, l) {
+    bsLijst = l; const cfg = LIJSTEN[l];
     $("#bs-fout").textContent = "";
+    dlgBs.querySelector(".dlg-kop h3").textContent = l === "meenemen" ? "Meenemen bewerken" : "Boodschap bewerken";
+    $("#b-cat").replaceChildren(...cfg.cats.map(([v, t]) => el("option", { value: v, text: t })));
+    $("#b-wie-label").textContent = cfg.wie;
+    $("#b-prijs-veld").hidden = !cfg.prijs;
     $("#b-id").value = b.id; $("#b-naam").value = b.naam; $("#b-hv").value = b.hoeveelheid || "";
-    $("#b-cat").value = b.categorie; $("#b-wie").value = b.wie || ""; $("#b-prijs").value = b.prijs != null ? Number(b.prijs) : "";
+    $("#b-cat").value = cfg.cats.some(c => c[0] === b.categorie) ? b.categorie : "overig";
+    $("#b-wie").value = b.wie || ""; $("#b-prijs").value = b.prijs != null ? Number(b.prijs) : "";
     dlgBs.showModal(); setTimeout(() => $("#b-naam").focus(), 30);
   }
   $("#bs-annuleer").addEventListener("click", () => dlgBs.close());
   fBs.addEventListener("submit", async e => {
     e.preventDefault();
-    const prijs = $("#b-prijs").value;
-    const item = { id: $("#b-id").value, naam: $("#b-naam").value.trim(), hoeveelheid: $("#b-hv").value.trim(), categorie: $("#b-cat").value, wie: $("#b-wie").value.trim(), prijs: prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)) };
+    const item = { id: $("#b-id").value, naam: $("#b-naam").value.trim(), hoeveelheid: $("#b-hv").value.trim(), categorie: $("#b-cat").value, wie: $("#b-wie").value.trim() };
+    if (LIJSTEN[bsLijst].prijs) { const prijs = $("#b-prijs").value; item.prijs = prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)); }
     const knop = $("#bs-opslaan"); knop.disabled = true;
     try { await rpc("weekend_boodschap_opslaan", { p_code: code, p_item: item, p_door: naam }); dlgBs.close(); melding("Opgeslagen"); await laad(true); }
     catch (err) { $("#bs-fout").textContent = err.message; }
@@ -793,7 +829,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
   });
 
   /* ---------- Bijwerken van de ander ---------- */
-  const typtIets = () => { const a = document.activeElement; return a && a.closest && a.closest("#form-bs-nieuw") && a.value; };
+  const typtIets = () => { const a = document.activeElement; return a && a.closest && a.closest(".bs-nieuw") && a.value; };
   setInterval(() => {
     if (document.visibilityState === "visible" && code && !bezig && !dlgOptie.open && !dlgBs.open && !$("#dlg-code").open && !typtIets()) laad(true);
   }, 15000);
