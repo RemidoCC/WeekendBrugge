@@ -71,15 +71,23 @@ header.kop .wrap{padding-top:34px;padding-bottom:86px;position:relative;z-index:
 .legenda{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:var(--inkt-zacht)}
 .legenda i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 
+/* Tabs */
+.tabs{display:flex;gap:4px;margin-top:22px;border-bottom:2px solid var(--rand)}
+.tab{appearance:none;border:0;background:none;padding:10px 18px 9px;font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:600;color:var(--inkt-zacht);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px}
+.tab:hover{color:var(--bordeaux)}
+.tab[aria-selected="true"]{color:var(--bordeaux-diep);border-bottom-color:var(--bordeaux)}
+.tab .teller{font-family:Figtree,system-ui,sans-serif;font-size:12px;font-weight:700;background:var(--perkament-2);color:var(--inkt-zacht);border-radius:999px;padding:1px 8px}
+.tab[aria-selected="true"] .teller{background:var(--bordeaux);color:#fff3df}
+
 /* Navigatie */
-nav.dagen{display:flex;gap:8px;overflow-x:auto;padding:18px 0 4px;scrollbar-width:none}
+nav.dagen{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px;scrollbar-width:none}
 nav.dagen::-webkit-scrollbar{display:none}
 nav.dagen a{flex:none;text-decoration:none;color:var(--inkt);border:1px solid var(--rand);background:var(--kaart);padding:7px 14px;border-radius:999px;font-weight:600;font-size:14px}
 nav.dagen a:hover{border-color:var(--goud)}
 
 /* Dagen */
 section.dag{margin:30px 0 10px;scroll-margin-top:110px}
-.dag-kop{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--bordeaux);padding-bottom:6px;margin-bottom:6px}
+.dag-kop{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--bordeaux);padding-bottom:6px;margin-bottom:6px;flex-wrap:wrap}
 .dag-kop h2{font-size:36px;color:var(--bordeaux-diep)}
 .dag-kop span{color:var(--inkt-zacht);font-size:15px}
 .dagdeel{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-bottom:1px dashed var(--rand)}
@@ -90,6 +98,8 @@ section.dag{margin:30px 0 10px;scroll-margin-top:110px}
 .status.open{background:#f6e3c9;color:var(--oranje)}
 .status.klaar{background:#dfe9d6;color:var(--groen)}
 .kaarten{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.scheiding{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--inkt-zacht);margin-top:4px}
+.scheiding::after{content:"";flex:1;border-top:1px solid var(--rand)}
 
 .kaart{position:relative;background:var(--kaart);border:1px solid var(--rand);border-radius:var(--radius);box-shadow:var(--schaduw);padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s, transform .2s}
 .kaart:hover{border-color:var(--goud)}
@@ -97,6 +107,8 @@ section.dag{margin:30px 0 10px;scroll-margin-top:110px}
 .kaart.gekozen::before{content:"Gekozen";position:absolute;top:-10px;left:12px;background:var(--bordeaux);color:#fff3df;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px}
 .kaart h4{margin:0;font-size:16px;line-height:1.3;font-weight:700}
 .kaart .oms{margin:0;color:var(--inkt-zacht);font-size:14px;white-space:pre-line}
+.tijd{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--bordeaux);background:#f7e9d0;border-radius:7px;padding:2px 8px;font-variant-numeric:tabular-nums;align-self:flex-start}
+.tijd svg{width:13px;height:13px}
 .prijsrij{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:auto}
 .prijs{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px}
 .prijs small{font-weight:500;color:var(--inkt-zacht);font-size:13px}
@@ -111,7 +123,7 @@ section.dag{margin:30px 0 10px;scroll-margin-top:110px}
 .knop.gekozen-knop{background:var(--goud-licht);border-color:var(--goud);color:var(--bordeaux-diep)}
 .knop.ikoon{padding:6px 9px;color:var(--inkt-zacht)}
 .knop[disabled]{opacity:.55;cursor:wait}
-.acties .duw{margin-left:auto;display:flex;gap:4px}
+.duw{margin-left:auto;display:flex;gap:4px}
 .acties a.link{font-size:13px;font-weight:600;text-decoration:none}
 .meta{font-size:11.5px;color:#9a8670}
 
@@ -125,7 +137,7 @@ section.dag{margin:30px 0 10px;scroll-margin-top:110px}
 .vast-rij.uit{opacity:.5}
 .vast-rij .t b{display:block}
 .vast-rij .t span{font-size:13px;color:var(--inkt-zacht)}
-.schakel{appearance:none;width:42px;height:24px;border-radius:999px;background:#d9c9ab;position:relative;cursor:pointer;transition:background .2s;margin:0}
+.schakel{appearance:none;width:42px;height:24px;border-radius:999px;background:#d9c9ab;position:relative;cursor:pointer;transition:background .2s;margin:0;flex:none}
 .schakel::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
 .schakel:checked{background:var(--bordeaux)}
 .schakel:checked::after{left:21px}
@@ -135,10 +147,34 @@ table.overzicht{width:100%;border-collapse:collapse;font-size:15px}
 .overzicht th,.overzicht td{padding:9px 6px;border-bottom:1px solid #efe3cc;text-align:left;vertical-align:top}
 .overzicht th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--inkt-zacht)}
 .overzicht td.bedrag,.overzicht th.bedrag{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.overzicht td.uur{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--bordeaux);font-weight:600}
 .overzicht tr.groep td{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:600;color:var(--bordeaux);padding-top:16px}
 .overzicht td.leeg{color:var(--oranje);font-style:italic}
 .overzicht tfoot td{font-weight:700;border-bottom:0}
 .overzicht tfoot tr.eind td{font-size:18px;border-top:2px solid var(--bordeaux)}
+
+/* Boodschappen */
+.bs-kop{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;margin:26px 0 12px}
+.bs-kop h2{font-size:36px;color:var(--bordeaux-diep)}
+.bs-kop .samen{color:var(--inkt-zacht);font-size:15px}
+.bs-kop .samen b{color:var(--inkt)}
+.bs-nieuw{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px auto;gap:8px;align-items:end;padding:14px 0}
+.bs-nieuw .veld label{font-size:12px}
+.bs-groep{margin:22px 0 0}
+.bs-groep h3{font-size:24px;color:var(--bordeaux);display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.bs-groep h3 span{font-family:Figtree,system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--inkt-zacht)}
+.bs-rij{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #efe3cc}
+.bs-rij:last-child{border-bottom:0}
+.vink{appearance:none;width:24px;height:24px;border:2px solid var(--goud);border-radius:7px;background:#fff;cursor:pointer;display:grid;place-items:center;margin:0;flex:none}
+.vink:checked{background:var(--groen);border-color:var(--groen)}
+.vink:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.bs-rij .naam b{font-weight:600}
+.bs-rij .naam .hv{color:var(--inkt-zacht);font-weight:500}
+.bs-rij .naam small{display:block;font-size:12.5px;color:var(--inkt-zacht)}
+.bs-rij.klaar .naam b{text-decoration:line-through;color:var(--inkt-zacht)}
+.bs-rij.klaar{opacity:.7}
+.bs-prijs{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.leeg-lijst{padding:26px 6px;text-align:center;color:var(--inkt-zacht)}
 
 /* Dialogen */
 dialog{border:0;border-radius:18px;padding:0;max-width:min(520px,calc(100vw - 24px));width:100%;background:var(--kaart);color:var(--inkt);box-shadow:0 20px 60px rgba(40,10,5,.35)}
@@ -148,7 +184,7 @@ dialog::backdrop{background:rgba(40,12,8,.55)}
 .dlg-kop p{margin:4px 0 0;font-size:14px;color:var(--goud-licht)}
 form.velden{padding:16px 20px 20px;display:grid;gap:12px}
 .veld label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
-.veld input,.veld textarea,.veld select{width:100%;border:1px solid var(--rand);border-radius:10px;padding:9px 11px;background:#fff}
+.veld input,.veld textarea,.veld select{width:100%;border:1px solid var(--rand);border-radius:10px;padding:9px 11px;background:#fff;min-height:42px}
 .veld input:focus,.veld textarea:focus,.veld select:focus{outline:2px solid var(--goud);outline-offset:0;border-color:var(--goud)}
 .veld textarea{min-height:80px;resize:vertical}
 .twee{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -156,7 +192,7 @@ form.velden{padding:16px 20px 20px;display:grid;gap:12px}
 .segment label{flex:1;text-align:center;margin:0;padding:8px 6px;cursor:pointer;font-weight:600;font-size:14px}
 .segment input{position:absolute;opacity:0;pointer-events:none}
 .segment label:has(input:checked){background:var(--bordeaux);color:#fff5e4}
-.hint{font-size:12.5px;color:var(--inkt-zacht)}
+.hint{font-size:12.5px;color:var(--inkt-zacht);margin:0}
 .dlg-acties{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
 .fout{color:var(--rood);font-size:14px;font-weight:600;min-height:1em}
 
@@ -167,6 +203,11 @@ form.velden{padding:16px 20px 20px;display:grid;gap:12px}
 footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:center}
 .laden{color:var(--inkt-zacht);padding:30px 0;text-align:center}
 
+@media (max-width:860px){
+  .bs-nieuw{grid-template-columns:1fr 1fr}
+  .bs-nieuw .veld-naam{grid-column:1/-1}
+  .bs-nieuw .knop{grid-column:1/-1;justify-content:center;min-height:42px}
+}
 @media (max-width:720px){
   .dagdeel{grid-template-columns:1fr;gap:10px}
   .dd-label{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -176,10 +217,12 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
   .bpost b{font-size:16px}
   .bpost.rest b{font-size:19px}
   .bpost.verberg-mobiel{display:none}
-  .dag-kop h2{font-size:30px}
-  .vast-rij{grid-template-columns:auto 1fr auto;}
+  .dag-kop h2,.bs-kop h2{font-size:30px}
+  .tab{font-size:21px;padding:8px 12px 7px}
+  .vast-rij{grid-template-columns:auto 1fr auto}
   .vast-rij .bedrag-k{grid-column:2/4;justify-self:start;margin-top:-6px}
   .twee{grid-template-columns:1fr}
+  .overzicht{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -201,7 +244,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
 <div class="budget" id="budget">
   <div class="wrap">
     <div class="budget-rij">
-      <div class="bpost verberg-mobiel"><small>Budget</small><b id="b-totaal">€ 2.100</b></div>
+      <div class="bpost verberg-mobiel"><small>Budget</small><b>€ 2.100</b></div>
       <div class="bpost verberg-mobiel"><small>Huisje (geboekt)</small><b>€ 720</b></div>
       <div class="bpost"><small>Vaste posten</small><b id="b-vast">€ 0</b></div>
       <div class="bpost"><small>Gekozen</small><b id="b-keuze">€ 0</b></div>
@@ -213,11 +256,33 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
 </div>
 
 <main class="wrap">
-  <nav class="dagen" aria-label="Spring naar">
-    <a href="#vrijdag">Vrijdag</a><a href="#zaterdag">Zaterdag</a><a href="#zondag">Zondag</a><a href="#vast">Vaste posten</a><a href="#overzicht">Overzicht</a>
-  </nav>
+  <div class="tabs" role="tablist" aria-label="Onderdelen">
+    <button class="tab" role="tab" id="tab-planning" aria-controls="paneel-planning" aria-selected="true">Planning</button>
+    <button class="tab" role="tab" id="tab-boodschappen" aria-controls="paneel-boodschappen" aria-selected="false">Boodschappen <span class="teller" id="bs-teller">0</span></button>
+  </div>
   <div id="storing"></div>
-  <div id="inhoud"><p class="laden">Planning laden…</p></div>
+
+  <div role="tabpanel" id="paneel-planning" aria-labelledby="tab-planning">
+    <nav class="dagen" aria-label="Spring naar">
+      <a href="#vrijdag">Vrijdag</a><a href="#zaterdag">Zaterdag</a><a href="#zondag">Zondag</a><a href="#vast">Vaste posten</a><a href="#overzicht">Overzicht</a>
+    </nav>
+    <div id="inhoud"><p class="laden">Planning laden…</p></div>
+  </div>
+
+  <div role="tabpanel" id="paneel-boodschappen" aria-labelledby="tab-boodschappen" hidden>
+    <div class="bs-kop"><h2>Boodschappen</h2><span class="samen" id="bs-samen"></span></div>
+    <div class="blok">
+      <form class="bs-nieuw" id="form-bs-nieuw" autocomplete="off">
+        <div class="veld veld-naam"><label for="n-naam">Wat</label><input id="n-naam" maxlength="120" required placeholder="Bijv. croissants"></div>
+        <div class="veld"><label for="n-hv">Hoeveel</label><input id="n-hv" maxlength="60" placeholder="14 stuks"></div>
+        <div class="veld"><label for="n-cat">Soort</label><select id="n-cat"></select></div>
+        <div class="veld"><label for="n-wie">Wie neemt mee</label><input id="n-wie" maxlength="40" placeholder="Optioneel"></div>
+        <div class="veld"><label for="n-prijs">Prijs (€)</label><input id="n-prijs" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Optioneel"></div>
+        <button class="knop hoofd" type="submit" id="n-knop">+ Toevoegen</button>
+      </form>
+    </div>
+    <div id="bs-lijst"><p class="laden">Boodschappen laden…</p></div>
+  </div>
 </main>
 
 <footer>Prijzen met het label <b>geschat</b> zijn een inschatting; zet ze op <b>bevestigd</b> zodra je de echte prijs weet. Alles wordt direct opgeslagen.</footer>
@@ -240,6 +305,10 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     <input type="hidden" id="o-id"><input type="hidden" id="o-dagdeel">
     <div class="veld"><label for="o-titel">Naam</label><input id="o-titel" maxlength="120" required></div>
     <div class="veld"><label for="o-oms">Omschrijving</label><textarea id="o-oms" maxlength="1000"></textarea></div>
+    <div class="twee" id="o-tijden">
+      <div class="veld"><label for="o-van">Van (optioneel)</label><input id="o-van" type="time" step="300"></div>
+      <div class="veld"><label for="o-tot">Tot (optioneel)</label><input id="o-tot" type="time" step="300"></div>
+    </div>
     <div class="veld"><label for="o-link">Link (optioneel)</label><input id="o-link" type="url" maxlength="500" placeholder="https://"></div>
     <div class="twee">
       <div class="veld"><label for="o-prijs">Prijs (€)</label><input id="o-prijs" type="number" min="0" step="0.01" inputmode="decimal" required value="0"></div>
@@ -253,6 +322,25 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     <p class="hint" id="o-reken"></p>
     <div class="fout" id="optie-fout"></div>
     <div class="dlg-acties"><button class="knop" type="button" id="optie-annuleer">Annuleren</button><button class="knop hoofd" type="submit" id="optie-opslaan">Opslaan</button></div>
+  </form>
+</dialog>
+
+<!-- Boodschap bewerken -->
+<dialog id="dlg-bs">
+  <div class="dlg-kop"><h3>Boodschap bewerken</h3></div>
+  <form class="velden" id="form-bs">
+    <input type="hidden" id="b-id">
+    <div class="veld"><label for="b-naam">Wat</label><input id="b-naam" maxlength="120" required></div>
+    <div class="twee">
+      <div class="veld"><label for="b-hv">Hoeveel</label><input id="b-hv" maxlength="60"></div>
+      <div class="veld"><label for="b-cat">Soort</label><select id="b-cat"></select></div>
+    </div>
+    <div class="twee">
+      <div class="veld"><label for="b-wie">Wie neemt mee</label><input id="b-wie" maxlength="40"></div>
+      <div class="veld"><label for="b-prijs">Prijs (€)</label><input id="b-prijs" type="number" min="0" step="0.01" inputmode="decimal"></div>
+    </div>
+    <div class="fout" id="bs-fout"></div>
+    <div class="dlg-acties"><button class="knop" type="button" id="bs-annuleer">Annuleren</button><button class="knop hoofd" type="submit" id="bs-opslaan">Opslaan</button></div>
   </form>
 </dialog>
 
@@ -272,7 +360,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     { id: "zaterdag", naam: "Zaterdag", datum: "14 november", delen: [
       ["za-ochtend", "Ochtend", "Rustig opstarten"],
       ["za-lunch", "Lunch", "In Brugge"],
-      ["za-middag", "Middag", "Activiteit in Brugge"],
+      ["za-middag", "Middag", "Activiteit"],
       ["za-avond", "Avond", "Diner"],
       ["za-nacht", "Nacht", "Stappen"] ] },
     { id: "zondag", naam: "Zondag", datum: "15 november", delen: [
@@ -280,15 +368,23 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       ["zo-wandeling", "Middag", "Wandeling"],
       ["zo-lunch", "Lunch", "Na de wandeling, daarna naar huis"] ] }
   ];
+  const CATEGORIEEN = [["ontbijt","Ontbijt"],["lunch","Lunch"],["diner","Diner"],["drank","Drank"],["snacks","Snacks"],["overig","Overig"]];
   const DEELNAAM = {}; DAGEN.forEach(d => d.delen.forEach(([id, n, s]) => DEELNAAM[id] = `${d.naam} · ${n.toLowerCase()} — ${s}`));
   DEELNAAM.vast = "Vaste post";
 
-  let items = [];
+  let items = [], boodschappen = [];
+  let bsBeschikbaar = true;     // false zolang update-2.sql nog niet gedraaid is
+  let tijdBeschikbaar = false;  // true zodra de database tijd-kolommen teruggeeft
   let bezig = false;
   const $ = s => document.querySelector(s);
   const eur = (n, dec) => "€ " + Number(n).toLocaleString("nl-NL", { minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0 });
   const eurSlim = n => eur(n, Math.round(n) !== Number(n));
   const kosten = it => it.prijs_type === "pp" ? Number(it.prijs) * PERSONEN : Number(it.prijs);
+  const hhmm = t => t ? String(t).slice(0, 5) : "";
+  const tijdTekst = it => it.tijd_van ? (hhmm(it.tijd_van) + (it.tijd_tot ? "–" + hhmm(it.tijd_tot) : "")) : (it.tijd_tot ? "tot " + hhmm(it.tijd_tot) : "");
+  // Gekozen bovenaan, daarbinnen op tijd, daarna de vaste volgorde
+  const sorteer = (a, b) => (b.gekozen - a.gekozen) || ((a.tijd_van || "99") < (b.tijd_van || "99") ? -1 : (a.tijd_van || "99") > (b.tijd_van || "99") ? 1 : 0) || (a.volgorde - b.volgorde);
+  const opTijd = (a, b) => ((a.tijd_van || "99") < (b.tijd_van || "99") ? -1 : (a.tijd_van || "99") > (b.tijd_van || "99") ? 1 : 0) || (a.volgorde - b.volgorde);
 
   const opslag = {
     get(k) { try { return localStorage.getItem(k) || ""; } catch { return ""; } },
@@ -308,6 +404,12 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     }
     kids.flat().forEach(c => c != null && e.append(c.nodeType ? c : document.createTextNode(c)));
     return e;
+  }
+  function klokje() {
+    const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("viewBox", "0 0 16 16"); s.setAttribute("aria-hidden", "true");
+    s.innerHTML = '<circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>';
+    return s;
   }
 
   function melding(tekst, isFout) {
@@ -331,16 +433,24 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     if (!r.ok) {
       const msg = (data && (data.message || data.msg)) || `Fout ${r.status}`;
       if (/toegangscode/i.test(msg)) throw new RpcFout("Onjuiste toegangscode.", "code");
-      if (data && (data.code === "PGRST202" || r.status === 404)) throw new RpcFout("De database is nog niet ingericht. Draai eerst setup.sql in Supabase.", "setup");
+      if (data && (data.code === "PGRST202" || r.status === 404)) throw new RpcFout("Deze functie bestaat nog niet in de database.", "setup");
       throw new RpcFout(msg, "anders");
     }
     return data;
   }
 
+  /* ---------- Laden ---------- */
   async function laad(stil) {
     if (!code) { vraagCode(); return; }
     try {
-      items = await rpc("weekend_lijst", { p_code: code }) || [];
+      const [lijst, bs] = await Promise.all([
+        rpc("weekend_lijst", { p_code: code }),
+        rpc("weekend_boodschappen", { p_code: code }).catch(e => { if (e.soort === "setup") return null; throw e; })
+      ]);
+      items = lijst || [];
+      tijdBeschikbaar = items.length ? ("tijd_van" in items[0]) : tijdBeschikbaar;
+      bsBeschikbaar = bs !== null;
+      boodschappen = bs || [];
       $("#storing").replaceChildren();
       teken();
     } catch (e) {
@@ -348,7 +458,7 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       else if (!stil) toonStoring(e.message);
     }
   }
-  function toonStoring(t) { $("#storing").replaceChildren(el("div", { class: "storing", text: t })); if (!items.length) $("#inhoud").replaceChildren(); }
+  function toonStoring(t) { $("#storing").replaceChildren(el("div", { class: "storing", text: t })); }
 
   function vraagCode(fout) {
     const d = $("#dlg-code");
@@ -362,19 +472,41 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     if (!c || !n) return;
     $("#code-fout").textContent = "";
     try {
-      items = await rpc("weekend_lijst", { p_code: c }) || [];
+      await rpc("weekend_lijst", { p_code: c });
       code = c; naam = n; opslag.set("wb-code", c); opslag.set("wb-naam", n);
-      $("#dlg-code").close(); $("#storing").replaceChildren(); teken();
+      $("#dlg-code").close(); await laad();
     } catch (err) { $("#code-fout").textContent = err.message; }
   });
   $("#dlg-code").addEventListener("cancel", e => { if (!code) e.preventDefault(); });
 
+  /* ---------- Tabs ---------- */
+  const TABS = ["planning", "boodschappen"];
+  function kiesTab(naamTab, focus) {
+    TABS.forEach(t => {
+      const aan = t === naamTab;
+      $("#tab-" + t).setAttribute("aria-selected", aan ? "true" : "false");
+      $("#tab-" + t).tabIndex = aan ? 0 : -1;
+      $("#paneel-" + t).hidden = !aan;
+    });
+    if (focus) $("#tab-" + naamTab).focus();
+    opslag.set("wb-tab", naamTab);
+    if (location.hash !== "#" + naamTab && (location.hash === "" || TABS.includes(location.hash.slice(1)))) history.replaceState(null, "", "#" + naamTab);
+  }
+  TABS.forEach((t, i) => {
+    const knop = $("#tab-" + t);
+    knop.addEventListener("click", () => kiesTab(t));
+    knop.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); kiesTab(TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length], true); }
+    });
+  });
+  kiesTab(TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : (opslag.get("wb-tab") || "planning"));
+
   function tekenWie() {
     const w = $("#wie"); w.hidden = !naam;
-    w.replaceChildren(el("span", { text: `Je werkt mee als ${naam}` }), el("button", { type: "button", onclick: () => vraagCode() , text: "wijzig" }));
+    w.replaceChildren(el("span", { text: `Je werkt mee als ${naam}` }), el("button", { type: "button", onclick: () => vraagCode(), text: "wijzig" }));
   }
 
-  /* ---------- Tekenen ---------- */
+  /* ---------- Tekenen: planning ---------- */
   function teken() {
     tekenWie();
     const root = $("#inhoud"); root.replaceChildren();
@@ -382,14 +514,19 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       const sec = el("section", { class: "dag", id: dag.id },
         el("div", { class: "dag-kop" }, el("h2", { text: dag.naam }), el("span", { text: dag.datum })));
       dag.delen.forEach(([id, naamDeel, sub]) => {
-        const opties = items.filter(i => i.dagdeel === id).sort((a, b) => a.volgorde - b.volgorde);
-        const gekozen = opties.find(o => o.gekozen);
+        const opties = items.filter(i => i.dagdeel === id).sort(sorteer);
+        const aantal = opties.filter(o => o.gekozen).length;
+        const kaarten = [];
+        opties.forEach((o, idx) => {
+          if (aantal && idx === aantal && idx < opties.length) kaarten.push(el("div", { class: "scheiding", text: "Andere opties" }));
+          kaarten.push(kaart(o));
+        });
         sec.append(el("div", { class: "dagdeel" },
           el("div", { class: "dd-label" },
             el("h3", { text: naamDeel }), el("p", { text: sub }),
-            el("span", { class: "status " + (gekozen ? "klaar" : "open"), text: gekozen ? "gekozen" : "nog kiezen" })),
+            el("span", { class: "status " + (aantal ? "klaar" : "open"), text: aantal ? `${aantal} gekozen` : "nog kiezen" })),
           el("div", { class: "kaarten" },
-            opties.map(kaart),
+            kaarten,
             el("button", { class: "toevoegen", type: "button", onclick: () => openOptie(null, id) }, "+ Optie toevoegen"))
         ));
       });
@@ -397,38 +534,41 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     });
     root.append(tekenVast(), tekenOverzicht());
     tekenBudget();
+    tekenBoodschappen();
   }
 
   function kaart(o) {
     const linkOk = /^https?:\/\//i.test(o.link || "");
+    const t = tijdTekst(o);
     return el("article", { class: "kaart" + (o.gekozen ? " gekozen" : "") },
       el("h4", { text: o.titel }),
+      t ? el("span", { class: "tijd" }, klokje(), t) : null,
       o.omschrijving ? el("p", { class: "oms", text: o.omschrijving }) : null,
       el("div", { class: "prijsrij" },
         el("span", { class: "prijs" }, Number(o.prijs) === 0 ? "Gratis" : eurSlim(o.prijs),
           Number(o.prijs) === 0 ? null : el("small", { text: o.prijs_type === "pp" ? ` p.p. · ${eurSlim(kosten(o))} totaal` : " totaal" })),
         el("span", { class: "label " + o.status, text: o.status })),
       el("div", { class: "acties" },
-        el("button", { type: "button", class: "knop " + (o.gekozen ? "gekozen-knop" : "hoofd"), onclick: ev => kies(o, ev.currentTarget) }, o.gekozen ? "✓ Gekozen" : "Kies"),
+        el("button", { type: "button", class: "knop " + (o.gekozen ? "gekozen-knop" : "hoofd"), "aria-pressed": o.gekozen ? "true" : "false", onclick: ev => kies(o, ev.currentTarget) }, o.gekozen ? "✓ Gekozen" : "Kies"),
         linkOk ? el("a", { class: "link", href: o.link, target: "_blank", rel: "noopener noreferrer", text: "Bekijk ↗" }) : null,
         el("span", { class: "duw" },
-          el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken", onclick: () => openOptie(o) }, "✎"),
-          el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen", onclick: () => verwijder(o) }, "🗑"))),
+          el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken: " + o.titel, onclick: () => openOptie(o) }, "✎"),
+          el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen: " + o.titel, onclick: () => verwijder(o) }, "🗑"))),
       o.bijgewerkt_door ? el("div", { class: "meta", text: `Laatst gewijzigd door ${o.bijgewerkt_door}` }) : null
     );
   }
 
   function tekenVast() {
-    const vast = items.filter(i => i.dagdeel === "vast").sort((a, b) => a.volgorde - b.volgorde);
+    const vast = items.filter(i => i.dagdeel === "vast").sort((a, b) => (b.gekozen - a.gekozen) || (a.volgorde - b.volgorde));
     const blok = el("div", { class: "blok" });
     vast.forEach(o => blok.append(el("div", { class: "vast-rij" + (o.gekozen ? "" : " uit") },
       el("input", { type: "checkbox", class: "schakel", checked: o.gekozen, "aria-label": "Meetellen: " + o.titel, onchange: ev => kies(o, ev.currentTarget) }),
       el("div", { class: "t" }, el("b", { text: o.titel }), o.omschrijving ? el("span", { text: o.omschrijving }) : null,
         el("div", {}, el("span", { class: "label " + o.status, text: o.status }))),
       el("div", { class: "bedrag-k prijs" }, eurSlim(kosten(o)), o.prijs_type === "pp" ? el("small", { text: ` (${eurSlim(o.prijs)} p.p.)` }) : null),
-      el("span", { class: "duw", style: "display:flex;gap:4px" },
-        el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken", onclick: () => openOptie(o) }, "✎"),
-        el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen", onclick: () => verwijder(o) }, "🗑"))
+      el("span", { class: "duw" },
+        el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken: " + o.titel, onclick: () => openOptie(o) }, "✎"),
+        el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen: " + o.titel, onclick: () => verwijder(o) }, "🗑"))
     )));
     blok.append(el("div", { class: "vast-plus" }, el("button", { type: "button", class: "knop", onclick: () => openOptie(null, "vast") }, "+ Vaste post toevoegen")));
     return el("section", { class: "dag", id: "vast" },
@@ -439,33 +579,39 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     const tbody = el("tbody");
     let somKeuze = 0, somVast = 0;
     DAGEN.forEach(dag => {
-      tbody.append(el("tr", { class: "groep" }, el("td", { colspan: "3", text: `${dag.naam} ${dag.datum}` })));
-      dag.delen.forEach(([id, n, s]) => {
-        const g = items.find(i => i.dagdeel === id && i.gekozen);
-        if (g) somKeuze += kosten(g);
-        tbody.append(el("tr", {},
-          el("td", { text: n }),
-          g ? el("td", { text: g.titel + (g.status === "geschat" ? " (geschat)" : "") }) : el("td", { class: "leeg", text: "nog niets gekozen" }),
-          el("td", { class: "bedrag", text: g ? eurSlim(kosten(g)) : "—" })));
+      tbody.append(el("tr", { class: "groep" }, el("td", { colspan: "4", text: `${dag.naam} ${dag.datum}` })));
+      dag.delen.forEach(([id, n]) => {
+        const gekozen = items.filter(i => i.dagdeel === id && i.gekozen).sort(opTijd);
+        if (!gekozen.length) {
+          tbody.append(el("tr", {}, el("td", { text: n }), el("td", { class: "uur", text: "" }), el("td", { class: "leeg", text: "nog niets gekozen" }), el("td", { class: "bedrag", text: "—" })));
+        }
+        gekozen.forEach((g, i) => {
+          somKeuze += kosten(g);
+          tbody.append(el("tr", {},
+            el("td", { text: i === 0 ? n : "" }),
+            el("td", { class: "uur", text: tijdTekst(g) }),
+            el("td", { text: g.titel + (g.status === "geschat" ? " (geschat)" : "") }),
+            el("td", { class: "bedrag", text: eurSlim(kosten(g)) })));
+        });
       });
     });
-    tbody.append(el("tr", { class: "groep" }, el("td", { colspan: "3", text: "Vaste posten" })));
+    tbody.append(el("tr", { class: "groep" }, el("td", { colspan: "4", text: "Vaste posten" })));
     items.filter(i => i.dagdeel === "vast" && i.gekozen).sort((a, b) => a.volgorde - b.volgorde).forEach(v => {
       somVast += kosten(v);
-      tbody.append(el("tr", {}, el("td", { text: "" }), el("td", { text: v.titel + (v.status === "geschat" ? " (geschat)" : "") }), el("td", { class: "bedrag", text: eurSlim(kosten(v)) })));
+      tbody.append(el("tr", {}, el("td", { text: "" }), el("td", { text: "" }), el("td", { text: v.titel + (v.status === "geschat" ? " (geschat)" : "") }), el("td", { class: "bedrag", text: eurSlim(kosten(v)) })));
     });
     const totaal = HUISJE + somVast + somKeuze, rest = BUDGET - totaal;
     const tfoot = el("tfoot", {},
-      el("tr", {}, el("td", { colspan: "2", text: "Huisje (geboekt)" }), el("td", { class: "bedrag", text: eur(HUISJE) })),
-      el("tr", {}, el("td", { colspan: "2", text: "Totaal uitgaven" }), el("td", { class: "bedrag", text: eurSlim(totaal) })),
-      el("tr", {}, el("td", { colspan: "2", text: `Per persoon (${PERSONEN})` }), el("td", { class: "bedrag", text: eur(totaal / PERSONEN, true) })),
-      el("tr", { class: "eind" }, el("td", { colspan: "2", text: rest >= 0 ? "Over van het budget" : "Boven budget" }),
+      el("tr", {}, el("td", { colspan: "3", text: "Huisje (geboekt)" }), el("td", { class: "bedrag", text: eur(HUISJE) })),
+      el("tr", {}, el("td", { colspan: "3", text: "Totaal uitgaven" }), el("td", { class: "bedrag", text: eurSlim(totaal) })),
+      el("tr", {}, el("td", { colspan: "3", text: `Per persoon (${PERSONEN})` }), el("td", { class: "bedrag", text: eur(totaal / PERSONEN, true) })),
+      el("tr", { class: "eind" }, el("td", { colspan: "3", text: rest >= 0 ? "Over van het budget" : "Boven budget" }),
         el("td", { class: "bedrag", style: `color:${rest >= 0 ? "var(--groen)" : "var(--rood)"}`, text: eurSlim(Math.abs(rest)) })));
     return el("section", { class: "dag", id: "overzicht" },
       el("div", { class: "dag-kop" }, el("h2", { text: "Overzicht" }), el("span", { text: `budget ${eur(BUDGET)} · €300 p.p.` })),
       el("div", { class: "blok", style: "overflow-x:auto" },
         el("table", { class: "overzicht" },
-          el("thead", {}, el("tr", {}, el("th", { text: "Dagdeel" }), el("th", { text: "Keuze" }), el("th", { class: "bedrag", text: "Kosten" }))),
+          el("thead", {}, el("tr", {}, el("th", { text: "Dagdeel" }), el("th", { text: "Tijd" }), el("th", { text: "Keuze" }), el("th", { class: "bedrag", text: "Kosten" }))),
           tbody, tfoot)));
   }
 
@@ -487,11 +633,54 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     $("#balk").classList.toggle("over", rest < 0);
   }
 
-  /* ---------- Acties ---------- */
+  /* ---------- Tekenen: boodschappen ---------- */
+  function tekenBoodschappen() {
+    const open = boodschappen.filter(b => !b.afgevinkt).length;
+    $("#bs-teller").textContent = open;
+    const lijst = $("#bs-lijst");
+    $("#form-bs-nieuw").querySelectorAll("input,select,button").forEach(x => x.disabled = !bsBeschikbaar);
+    if (!bsBeschikbaar) {
+      $("#bs-samen").textContent = "";
+      lijst.replaceChildren(el("div", { class: "storing", text: "De boodschappenlijst is nog niet ingericht in de database. Draai eerst update-2.sql in Supabase." }));
+      return;
+    }
+    const metPrijs = boodschappen.filter(b => b.prijs != null);
+    const som = metPrijs.reduce((s, b) => s + Number(b.prijs), 0);
+    $("#bs-samen").replaceChildren(
+      el("b", { text: `${boodschappen.length - open} van ${boodschappen.length}` }), " afgevinkt",
+      metPrijs.length ? " · geschat " : null, metPrijs.length ? el("b", { text: eurSlim(som) }) : null,
+      metPrijs.length ? ` (${eur(som / PERSONEN, true)} p.p.)` : null);
+    if (!boodschappen.length) {
+      lijst.replaceChildren(el("p", { class: "leeg-lijst", text: "Nog niets op de lijst. Zet hierboven het eerste ding erop." }));
+      return;
+    }
+    lijst.replaceChildren(...CATEGORIEEN.map(([cat, label]) => {
+      const rijen = boodschappen.filter(b => b.categorie === cat)
+        .sort((a, b) => (a.afgevinkt - b.afgevinkt) || String(a.toegevoegd_op).localeCompare(String(b.toegevoegd_op)));
+      if (!rijen.length) return null;
+      const nogTeDoen = rijen.filter(r => !r.afgevinkt).length;
+      return el("section", { class: "bs-groep" },
+        el("h3", {}, label, el("span", { text: nogTeDoen ? `nog ${nogTeDoen}` : "alles binnen" })),
+        el("div", { class: "blok" }, rijen.map(bsRij)));
+    }).filter(Boolean));
+  }
+
+  function bsRij(b) {
+    const sub = [b.wie ? `neemt ${b.wie} mee` : "", b.bijgewerkt_door ? `door ${b.bijgewerkt_door}` : ""].filter(Boolean).join(" · ");
+    return el("div", { class: "bs-rij" + (b.afgevinkt ? " klaar" : "") },
+      el("input", { type: "checkbox", class: "vink", checked: b.afgevinkt, "aria-label": (b.afgevinkt ? "Niet meer afgevinkt: " : "Afvinken: ") + b.naam, onchange: ev => vink(b, ev.currentTarget) }),
+      el("div", { class: "naam" },
+        el("b", { text: b.naam }), b.hoeveelheid ? el("span", { class: "hv", text: " · " + b.hoeveelheid }) : null,
+        sub ? el("small", { text: sub }) : null),
+      el("span", { class: "bs-prijs", text: b.prijs != null ? eurSlim(b.prijs) : "" }),
+      el("span", { class: "duw" },
+        el("button", { type: "button", class: "knop ikoon", title: "Bewerken", "aria-label": "Bewerken: " + b.naam, onclick: () => openBs(b) }, "✎"),
+        el("button", { type: "button", class: "knop ikoon", title: "Verwijderen", "aria-label": "Verwijderen: " + b.naam, onclick: () => verwijderBs(b) }, "🗑")));
+  }
+
+  /* ---------- Acties: planning ---------- */
   async function kies(o, knop) {
     if (bezig) return; bezig = true; if (knop) knop.disabled = true;
-    // direct zichtbaar maken
-    if (o.dagdeel !== "vast" && !o.gekozen) items.forEach(i => { if (i.dagdeel === o.dagdeel) i.gekozen = false; });
     o.gekozen = !o.gekozen; teken();
     try { await rpc("weekend_kies", { p_code: code, p_id: o.id, p_door: naam }); await laad(true); }
     catch (e) { melding(e.message, true); await laad(true); }
@@ -512,6 +701,8 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     $("#optie-sub").textContent = DEELNAAM[dd] || "";
     $("#o-id").value = o ? o.id : ""; $("#o-dagdeel").value = dd;
     $("#o-titel").value = o ? o.titel : ""; $("#o-oms").value = o ? o.omschrijving : "";
+    $("#o-van").value = o ? hhmm(o.tijd_van) : ""; $("#o-tot").value = o ? hhmm(o.tijd_tot) : "";
+    $("#o-tijden").hidden = dd === "vast";
     $("#o-link").value = o ? o.link : ""; $("#o-prijs").value = o ? Number(o.prijs) : 0;
     fOptie.querySelector(`input[name=o-type][value=${o ? o.prijs_type : (dd === "vast" ? "totaal" : "pp")}]`).checked = true;
     fOptie.querySelector(`input[name=o-status][value=${o ? o.status : "geschat"}]`).checked = true;
@@ -528,6 +719,8 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
     e.preventDefault();
     const link = $("#o-link").value.trim();
     if (link && !/^https?:\/\//i.test(link)) { $("#optie-fout").textContent = "Een link moet met http:// of https:// beginnen."; return; }
+    const van = $("#o-van").value, tot = $("#o-tot").value;
+    if (van && tot && tot <= van) { $("#optie-fout").textContent = "De eindtijd moet na de begintijd liggen."; return; }
     const item = {
       dagdeel: $("#o-dagdeel").value,
       titel: $("#o-titel").value.trim(),
@@ -535,20 +728,74 @@ footer{padding:36px 0 50px;color:var(--inkt-zacht);font-size:13px;text-align:cen
       link,
       prijs: Math.max(0, parseFloat($("#o-prijs").value) || 0),
       prijs_type: fOptie.querySelector("input[name=o-type]:checked").value,
-      status: fOptie.querySelector("input[name=o-status]:checked").value
+      status: fOptie.querySelector("input[name=o-status]:checked").value,
+      tijd_van: van, tijd_tot: tot
     };
     if ($("#o-id").value) item.id = $("#o-id").value;
     const knop = $("#optie-opslaan"); knop.disabled = true;
     try {
-      await rpc("weekend_opslaan", { p_code: code, p_item: item, p_door: naam });
-      dlgOptie.close(); melding("Opgeslagen"); await laad(true);
+      const terug = await rpc("weekend_opslaan", { p_code: code, p_item: item, p_door: naam });
+      dlgOptie.close();
+      melding((van || tot) && terug && !("tijd_van" in terug) ? "Opgeslagen, maar zonder tijd: draai eerst update-2.sql" : "Opgeslagen", (van || tot) && terug && !("tijd_van" in terug));
+      await laad(true);
     } catch (err) { $("#optie-fout").textContent = err.message; }
     finally { knop.disabled = false; }
   });
 
+  /* ---------- Acties: boodschappen ---------- */
+  ["#n-cat", "#b-cat"].forEach(s => $(s).replaceChildren(...CATEGORIEEN.map(([v, l]) => el("option", { value: v, text: l }))));
+
+  $("#form-bs-nieuw").addEventListener("submit", async e => {
+    e.preventDefault();
+    const n = $("#n-naam").value.trim(); if (!n) return;
+    const prijs = $("#n-prijs").value;
+    const item = { naam: n, hoeveelheid: $("#n-hv").value.trim(), categorie: $("#n-cat").value, wie: $("#n-wie").value.trim(), prijs: prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)) };
+    const knop = $("#n-knop"); knop.disabled = true;
+    try {
+      const nieuw = await rpc("weekend_boodschap_opslaan", { p_code: code, p_item: item, p_door: naam });
+      if (nieuw) boodschappen.push(nieuw);
+      ["#n-naam", "#n-hv", "#n-wie", "#n-prijs"].forEach(s => $(s).value = "");
+      tekenBoodschappen(); $("#n-naam").focus();
+    } catch (err) { melding(err.message, true); }
+    finally { knop.disabled = false; }
+  });
+
+  async function vink(b, box) {
+    box.disabled = true;
+    b.afgevinkt = !b.afgevinkt; tekenBoodschappen();
+    try { await rpc("weekend_boodschap_opslaan", { p_code: code, p_item: { id: b.id, afgevinkt: b.afgevinkt }, p_door: naam }); }
+    catch (e) { melding(e.message, true); }
+    await laad(true);
+  }
+
+  async function verwijderBs(b) {
+    if (!confirm(`“${b.naam}” van de lijst halen?`)) return;
+    try { await rpc("weekend_boodschap_verwijder", { p_code: code, p_id: b.id }); boodschappen = boodschappen.filter(x => x.id !== b.id); tekenBoodschappen(); melding("Verwijderd"); }
+    catch (e) { melding(e.message, true); }
+  }
+
+  const dlgBs = $("#dlg-bs"), fBs = $("#form-bs");
+  function openBs(b) {
+    $("#bs-fout").textContent = "";
+    $("#b-id").value = b.id; $("#b-naam").value = b.naam; $("#b-hv").value = b.hoeveelheid || "";
+    $("#b-cat").value = b.categorie; $("#b-wie").value = b.wie || ""; $("#b-prijs").value = b.prijs != null ? Number(b.prijs) : "";
+    dlgBs.showModal(); setTimeout(() => $("#b-naam").focus(), 30);
+  }
+  $("#bs-annuleer").addEventListener("click", () => dlgBs.close());
+  fBs.addEventListener("submit", async e => {
+    e.preventDefault();
+    const prijs = $("#b-prijs").value;
+    const item = { id: $("#b-id").value, naam: $("#b-naam").value.trim(), hoeveelheid: $("#b-hv").value.trim(), categorie: $("#b-cat").value, wie: $("#b-wie").value.trim(), prijs: prijs === "" ? "" : String(Math.max(0, parseFloat(prijs) || 0)) };
+    const knop = $("#bs-opslaan"); knop.disabled = true;
+    try { await rpc("weekend_boodschap_opslaan", { p_code: code, p_item: item, p_door: naam }); dlgBs.close(); melding("Opgeslagen"); await laad(true); }
+    catch (err) { $("#bs-fout").textContent = err.message; }
+    finally { knop.disabled = false; }
+  });
+
   /* ---------- Bijwerken van de ander ---------- */
+  const typtIets = () => { const a = document.activeElement; return a && a.closest && a.closest("#form-bs-nieuw") && a.value; };
   setInterval(() => {
-    if (document.visibilityState === "visible" && code && !bezig && !dlgOptie.open && !$("#dlg-code").open) laad(true);
+    if (document.visibilityState === "visible" && code && !bezig && !dlgOptie.open && !dlgBs.open && !$("#dlg-code").open && !typtIets()) laad(true);
   }, 15000);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && code) laad(true); });
 
