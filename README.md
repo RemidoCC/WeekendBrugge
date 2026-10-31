@@ -8,6 +8,7 @@ Planner voor het vriendenweekend in Beernem (13–15 november 2026): per dagdeel
 - `update-3.sql`: tab Meenemen, meteen gevuld met suggesties. Eén keer draaien na `update-2.sql`.
 - `update-4.sql`: vaste posten gekoppeld aan de boodschappenlijst, en voorschieten en verrekenen per persoon. Eén keer draaien na `update-3.sql`.
 - `update-5.sql`: takenlijst met deadlines, reserveringsstatus en adressen per optie, adres van het huisje, volgorde van lijstregels en bonnetjes bij uitgaven. Eén keer draaien na `update-4.sql`.
+- `update-6.sql`: lichte versiecheck (minder verkeer), wijzigingen bijhouden per lijstregel, taak en uitgave ("wie deed wat"), en opslaan met vaste id's zodat wijzigingen offline in een wachtrij kunnen. Eén keer draaien na `update-5.sql`.
 - `manifest.webmanifest`, `sw.js`, `icoon*`: maken de pagina installeerbaar als app op je telefoon.
 - `opruimen.sql`: haalt na het weekend alles weer weg.
 

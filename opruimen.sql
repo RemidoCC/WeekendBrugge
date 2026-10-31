@@ -19,4 +19,6 @@ drop function if exists public.weekend_taak_opslaan(text, jsonb, text);
 drop function if exists public.weekend_taak_verwijder(text, uuid);
 drop function if exists public.weekend_instellingen(text);
 drop function if exists public.weekend_instelling_opslaan(text, text, text);
+drop function if exists public.weekend_versie(text);
+drop function if exists public.weekend_kies_zet(text, uuid, boolean, text);
 drop schema if exists weekend cascade;
